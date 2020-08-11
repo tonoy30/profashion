@@ -9,7 +9,7 @@ namespace profashion.api.Handlers
         public async Task HandleAsync(ActivityCreatedEvent @event)
         {
             await Task.CompletedTask;
-            Console.WriteLine($"ActivityCreatedEventHandler:: {@event.Name}");
+            Console.WriteLine($"ActivityCreatedEventHandler :: {@event.Name}");
         }
     }
 }

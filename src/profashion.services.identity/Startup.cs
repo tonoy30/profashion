@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using profashion.core.Commands;
+using profashion.core.Mongo;
 using profashion.core.RabbitMQ;
 using profashion.services.identity.Handlers;
 
@@ -33,6 +34,7 @@ namespace profashion.services.identity
                 o.ApiVersionReader = new HeaderApiVersionReader("x-api-version");
             });
             services.AddRabbitMq(Configuration);
+            services.AddMongo(Configuration);
             services.AddScoped<ICommandHandler<CreateUserCommand>, CreateUserCommandHandler>();
         }
 

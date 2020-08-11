@@ -1,20 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using profashion.business.Models;
+using profashion.business.Repositories;
 using profashion.core.Commands;
+using profashion.core.Mongo;
 using profashion.core.RabbitMQ;
 using profashion.services.activities.Handlers;
+using profashion.services.activities.Services;
+using profashion.services.activities.Services.DatabaseSeeder;
 
 namespace profashion.services.activities
 {
@@ -40,7 +38,13 @@ namespace profashion.services.activities
                 o.ApiVersionReader = new HeaderApiVersionReader("x-api-version");
             });
             services.AddRabbitMq(Configuration);
+            services.AddMongo(Configuration);
             services.AddScoped<ICommandHandler<CreateActivityCommand>, CreateActivityCommandHandler>();
+            services.AddScoped<IRepository<Activity>, ActivityRepository>();
+            services.AddScoped<IRepository<Category>, CategoryRepository>();
+            services.AddScoped<IDatabaseSeeder, ActivitySeederService>();
+            services.AddScoped<IDatabaseSeeder, CategorySeederService>();
+            services.AddScoped<IService<Activity>, ActivityService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +69,8 @@ namespace profashion.services.activities
             });
 
             app.UseAuthorization();
+
+            app.ApplicationServices.GetService<IDatabaseInitializer>().InitializeAsync();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }

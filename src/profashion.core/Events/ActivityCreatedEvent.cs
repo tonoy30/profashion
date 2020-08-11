@@ -1,4 +1,5 @@
 ﻿using System;
+using profashion.business.Models;
 
 namespace profashion.core.Events
 {

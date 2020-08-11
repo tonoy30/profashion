@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using profashion.api.Handlers;
 using profashion.core.Events;
+using profashion.core.Mongo;
 using profashion.core.RabbitMQ;
 
 namespace profashion.api
@@ -33,6 +34,7 @@ namespace profashion.api
                 o.ApiVersionReader = new HeaderApiVersionReader("x-api-version");
             });
             services.AddRabbitMq(Configuration);
+            services.AddMongo(Configuration);
             services.AddScoped<IEventHandler<ActivityCreatedEvent>, ActivityCreatedEventHandler>();
             services.AddScoped<IEventHandler<UserCreatedEvent>, UserCreatedEventHandler>();
         }
