@@ -9,4 +9,4 @@
 5. Angular
 6. Rxjs
 7. Redux
-8. Heoku
+8. Heroku
