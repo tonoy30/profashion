@@ -3,10 +3,11 @@
 
 ### Build Using:
 1. Dotnet Webapi
-2. Rabbitmq
-3. CQRS pattern
-4. Docker
-5. Angular
-6. Rxjs
-7. Redux
-8. Heroku
+2. MongoDb
+3. Rabbitmq
+4. CQRS pattern
+5. Docker
+6. Angular
+7. Rxjs
+8. Redux
+9. Heroku
