@@ -1,5 +1,5 @@
 # profashion
-## Microservice based e-eommerce application for selling custom made outfits for male and female.
+## Microservice based e-commerce application for selling custom made outfits for male and female.
 
 ### Build Using:
 1. Dotnet Webapi
